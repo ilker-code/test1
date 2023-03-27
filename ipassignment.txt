@@ -1,0 +1,101 @@
+#
+# file: ipassignment.conf
+#
+# This file is used to implement the IP-per-user feature.  It allows the 
+# administrator to assign specific addresses to specific users or specific
+# ranges to specific groups when they connect using Office Mode or L2TP.
+# 
+# The format of this file is simple:  Each line specifies the target 
+# gateway, the IP address (or addresses) we wish to assign and the user 
+# (or group) name as in the following examples:
+#
+# Gateway        Type   IP Address                                User Name
+# =============  =====  ========================================  ========================================= 
+# Paris-GW,             10.5.5.8,                                 Jean
+# Brasilia,      addr   10.6.5.8, wins=(192.168.3.2,192.168.3.3)  Joao  # comments are allowed
+# Miami,         addr   10.7.5.8, dns=(192.168.3.7,192.168.3.8)   CN=John,OU=users,O=cpmgmt.acme.com.gibeuu
+# 10.1.1.2       range  100.107.105.110-100.107.105.119/24        Finance
+# *              net    10.7.5.32/28  suffix=(acct.acme.com)      Accounting
+#
+# Note that real records do not begin with a pound-sign (#), and the commas
+# are optional.  Invalid lines are treated as comments.  Also, the 
+# user name may be followed by a pound-sign and a comment.
+#
+# The first item is the gateway name or address.  On lines that assign
+# multiple IP addresses to a group of users or a network (range or net
+# in the second item) this should be the physical address of the gateway,
+# or an asterisk (*) to signify all gateways.
+# On lines that assign one IP for one user this could be the gateway
+# name as well.  A gateway will only honor lines that refer to it.
+#
+# The second item is a descriptor.  It can be 'addr', 'range' or 'net'.
+# 'addr' specifies one IP for one user.  This prefix is optional.
+# 'range' and 'net' specify a range of addresses.  These prefixes are
+# required.
+#
+# The third item is the IP address or addresses.  In the case of a single 
+# address, it is specified in standard dotted decimal format.
+# ranges can be specified either by the first and last IP address, or using
+# a net specification.  In either case you need to also specify the subnet
+# mask length ('/24' means 255.255.255.0).  With a range, this is the subnet
+# mask.  With a net it is both the subnet mask and it also determines the
+# addresses in the range.
+#
+# After the third item come any of three keyword parameters.  These are 
+# specifications for WINS (or NBNS) servers, for DNS servers and a DNS
+# suffix.  The parameters themselves are on the format 'keyword=(params)'
+# where the params can be one address (such as "192.168.3.2"), several
+# IP addresses (such as "192.168.3.2,192.168.3.3") or a string (only
+# for the DNS suffix.  The relevant keywords are "dns", "wins" and 
+# "suffix" and they are not case-sensitive.
+# Inside the keyword parameters there must be no spaces or any other
+# extra characters.  These will cause the entire line to be ignored.
+#
+# The last item is the user name.  This can be a common name if the
+# user authenticates with some username/password method (like hybrid
+# or MD5-Challenge) or a DN if the user authenticates with a 
+# certificate.
+#
+#
+Gateway        Type   IP Address                                User Name
+=============  =====  ========================================  =========================================
+10.2.222.253   net    172.20.48.0/28                            Technology-VPN
+10.2.222.253   net    172.20.13.0/24                            StoyankaVpn
+10.2.222.253   net    172.20.15.0/25                            Detaysoft-vpn
+10.2.222.253   net    172.20.15.128/28                          UBV-vpn
+10.2.222.253   net    172.20.14.0/30                            Mantalive-vpn
+10.2.222.253   net    172.20.14.4/30                            NTT-DATA
+10.2.222.253   net    172.20.14.8/29                            Developer-1C
+10.2.222.253   net    172.20.14.16/30                           Kolaymutabakat-vpn
+10.2.222.253   net    172.20.14.20/30                           Kesit-vpn
+10.2.222.253   net    172.20.14.24/30                           Threadinmotion-vpn
+10.2.222.253   net    172.20.14.28/30                           Logsign-vpn
+10.2.222.253   net    172.20.14.32/30                           OBSS-vpn
+10.2.222.253   net    172.20.14.36/30                           Maysiber-vpn
+10.2.222.253   net    172.20.14.40/30                           Logitta-vpn
+10.2.222.253   net    172.20.14.44/30                           Dogusgrup-vpn
+10.2.222.253   net    172.20.14.48/30                           Ercedanismanlik-vpn
+10.2.222.253   net    172.20.14.52/30                           Joloda-vpn
+10.2.222.253   net    172.20.14.56/30                           ISIS-vpn
+10.2.222.253   net    172.20.14.60/30                           Yonetimacademy-vpn
+10.2.222.253   net    172.20.14.64/29                           Rapidsol-vpn
+10.2.222.253   net    172.20.14.72/30                           SNI-vpn
+10.2.222.253   net    172.20.14.76/30                           Medepia-vpn
+10.2.222.253   net    172.20.15.160/27                          Obase-vpn
+10.2.222.253   net    172.20.14.96/28                           Metod-vpn
+10.2.222.253   net    172.20.14.112/29                          Evam-vpn
+10.2.222.253   net    172.20.14.120/30                          Gtech-vpn
+10.2.222.253   net    172.20.14.124/30                          Profelis-vpn
+10.2.222.253   net    172.20.14.128/29                          Elsys-vpn
+10.2.222.253   net    172.20.14.136/30                          Edmar-vpn
+10.2.222.253   net    172.20.14.140/30                          Conveyor-vpn
+10.2.222.253   net    172.20.14.144/30                          Meyer-vpn
+10.2.222.253   net    172.20.14.148/30                          Prodenso-vpn
+10.2.222.253   net    172.20.14.152/30                          Monibilisim-vpn
+10.2.222.253   net    172.20.14.156/30                          Antbilisim-vpn
+10.2.222.253   net    172.20.14.160/27                          Bimser-vpn
+10.2.222.253   net    172.20.14.192/30                          Softeal-vpn
+10.2.222.253   net    172.20.14.224/29                          Datatech-vpn
+10.2.222.253   net    172.20.14.232/30                          Bulutbroker-vpn
+10.2.222.253   net    172.20.14.240/29                          Sistas-vpn
+10.2.222.253   net    172.20.14.236/30				Nsc-Vpn
